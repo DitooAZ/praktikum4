@@ -1,0 +1,30 @@
+SYNTAX LATIHAN PRAKTIKUM 4
+
+1.SELECT COUNT(DISTINCT tb_mhs.nim) AS mahasiswa_yang_mengambil_matkul
+FROM tb_mhs INNER JOIN tb_ambil_mk ON tb_mhs.nim = tb_ambil_mk.nim;
+
+2.SELECT tb_mhs.jenis_kelamin, COUNT(tb_mhs.jenis_kelamin) AS jumlah
+FROM tb_mhs
+LEFT JOIN tb_ambil_mk
+ON tb_mhs.nim = tb_ambil_mk.nim
+WHERE tb_ambil_mk.nim IS NULL
+GROUP BY tb_mhs.jenis_kelamin;
+
+3. SELECT tb_mhs.nim, tb_mhs.nama, tb_matkul.kode_mk, tb_matkul.nama_mk
+FROM tb_mhs
+INNER JOIN tb_ambil_mk
+ON tb_mhs.nim = tb_ambil_mk.nim
+INNER JOIN tb_matkul
+ON tb_ambil_mk.kode_mk = tb_matkul.kode_mk;
+
+4. SELECT m.nim, m.nama, SUM(sks) AS total_sks
+FROM tb_mhs m, tb_ambil_mk a, tb_matkul k
+WHERE m.nim = a.nim AND a.kode_mk = k.kode_mk
+GROUP BY nama HAVING SUM(sks) > 4 AND SUM(sks) < 10;
+
+5. SELECT k.kode_mk, k.nama_mk, sks, semester
+FROM tb_mhs m LEFT JOIN tb_ambil_mk a
+ON m.nim = a.nim
+RIGHT JOIN tb_matkul k
+ON a.kode_mk = k.kode_mk
+WHERE nama IS NULL;
