@@ -1,0 +1,22 @@
+Tugas Rumah
+1a. SELECT ambil_mk.kd_mk, tb_matakuliah.nama_mk
+FROM ambil_mk INNER JOIN tb_matakuliah
+ON ambil_mk.kd_mk = tb_matakuliah.kd_mk
+WHERE jml_mhs = 40;
+
+1b. SELECT * FROM tb_instruktur INNER JOIN ambil_mk
+ON tb_instruktur.nip = ambil_mk.nip
+WHERE ambil_mk.kd_mk = "PT1102";
+
+1c. SELECT * FROM tb_instruktur LEFT OUTER JOIN (ambil_mk INNER JOIN tb_matakuliah ON ambil_mk.kd_mk = tb_matakuliah.kd_mk)
+ON tb_instruktur.nip = ambil_mk.nip
+WHERE ambil_mk.nip IS NULL;
+
+join & union
+2a. SELECT * FROM tb_customer JOIN tb_orders;
+
+2b. SELECT * FROM tb_customer INNER JOIN tb_orders
+ON tb_customer.customer_id = tb_orders.customer_id
+UNION ALL
+SELECT * FROM tb_customer LEFT OUTER JOIN tb_orders
+ON tb_customer.customer_id = tb_orders.customer_id;
